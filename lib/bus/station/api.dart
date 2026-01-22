@@ -22,4 +22,17 @@ class TdxBusStationApi {
     }
     return null;
   }
+
+  static Future<List<Station>?> getMap(
+    City city, {
+    void Function(int, int)? onProgress,
+  }) => get(
+    city,
+    select: [
+      'StationUID',
+      'StationPosition.PositionLon',
+      'StationPosition.PositionLat',
+    ],
+    onProgress: onProgress,
+  );
 }
