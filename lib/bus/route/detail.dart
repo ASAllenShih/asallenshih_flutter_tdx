@@ -55,8 +55,8 @@ class TdxBusRouteDetail {
     final String? operator = routeDetail?.operators
         ?.map((o) => o.operatorName?.text ?? '')
         .join(', ');
-    final String? departureStop = routeDetail?.departureStopName?.text;
-    final String? destinationStop = routeDetail?.destinationStopName?.text;
+    final String? departureStop = route.departureStopName?.text;
+    final String? destinationStop = route.destinationStopName?.text;
     final String? ticketPrice = routeDetail?.ticketPriceDescription?.text;
     await dialogShow(
       context: context,
