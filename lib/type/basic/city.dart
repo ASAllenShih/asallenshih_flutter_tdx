@@ -28,4 +28,10 @@ class City {
         .whereType<City>()
         .toList();
   }
+
+  static final City busInter = City(
+    cityID: '1',
+    city: 'Inter',
+    cityName: '公路客運',
+  );
 }
