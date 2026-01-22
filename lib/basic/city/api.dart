@@ -15,4 +15,13 @@ class TdxBasicCityApi {
       ),
     );
   }
+
+  static Future<City?> getByCityID(
+    String cityID, {
+    List<String> select = const [],
+    void Function(int, int)? onProgress,
+  }) async {
+    return (await get(select: select, onProgress: onProgress) as List<City?>)
+        .firstWhere((city) => city?.cityID == cityID, orElse: () => null);
+  }
 }
