@@ -32,19 +32,17 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
        );
   static List<tdx_route.Route> _getRoutes(
     List<tdx_route.Route> routes, {
-    TextEditingController? searchController,
+    String? searchText,
   }) {
-    final searchText = searchController?.text.toLowerCase() ?? '';
-    if (searchText.isEmpty) {
+    final text = searchText?.toLowerCase() ?? '';
+    if (text.isEmpty) {
       return routes;
     }
     final filterRoutes = routes
         .where(
           (route) =>
-              (route.routeName?.zhTw?.toLowerCase() ?? '').contains(
-                searchText,
-              ) ||
-              (route.routeName?.en?.toLowerCase() ?? '').contains(searchText),
+              (route.routeName?.zhTw?.toLowerCase() ?? '').contains(text) ||
+              (route.routeName?.en?.toLowerCase() ?? '').contains(text),
         )
         .toList();
     if (filterRoutes.isEmpty) {
@@ -53,10 +51,8 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
     final startsWithRoutes = filterRoutes
         .where(
           (route) =>
-              (route.routeName?.zhTw?.toLowerCase() ?? '').startsWith(
-                searchText,
-              ) ||
-              (route.routeName?.en?.toLowerCase() ?? '').startsWith(searchText),
+              (route.routeName?.zhTw?.toLowerCase() ?? '').startsWith(text) ||
+              (route.routeName?.en?.toLowerCase() ?? '').startsWith(text),
         )
         .toList();
     if (startsWithRoutes.isEmpty) {
@@ -67,7 +63,7 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
 
   static List<TdxBusRouteListTile> fromRoutes(
     List<tdx_route.Route> routes, {
-    TextEditingController? searchController,
+    String? searchText,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onTap,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onLongPress,
     dynamic Function(tdx_route.Route route, City? city) funcTitle = dFuncTitle,
@@ -76,10 +72,7 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
     dynamic Function(tdx_route.Route route, City? city) funcTrailing =
         dFuncTrailing,
   }) {
-    final filteredRoutes = _getRoutes(
-      routes,
-      searchController: searchController,
-    );
+    final filteredRoutes = _getRoutes(routes, searchText: searchText);
     TdxBusRouteUtil.sortRun(filteredRoutes);
     return filteredRoutes
         .map(
@@ -97,7 +90,7 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
 
   static List<TdxBusRouteListTile> fromRoutesWithCity(
     Map<City, List<tdx_route.Route>> cityRoutes, {
-    TextEditingController? searchController,
+    String? searchText,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onTap,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onLongPress,
     dynamic Function(tdx_route.Route route, City? city) funcTitle = dFuncTitle,
@@ -109,10 +102,7 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
     final routes = cityRoutes.entries.expand((entry) {
       final city = entry.key;
       final routes = entry.value;
-      final filteredRoutes = _getRoutes(
-        routes,
-        searchController: searchController,
-      );
+      final filteredRoutes = _getRoutes(routes, searchText: searchText);
       return filteredRoutes.map((route) => MapEntry(city, route));
     }).toList();
     routes.sort((a, b) => TdxBusRouteUtil.sort(a.value, b.value));
