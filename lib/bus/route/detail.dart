@@ -3,6 +3,7 @@ import 'package:asallenshih_flutter_tdx/type/basic/city.dart';
 import 'package:asallenshih_flutter_tdx/type/bus/route.dart';
 import 'package:asallenshih_flutter_util/device.dart';
 import 'package:asallenshih_flutter_util/log.dart';
+import 'package:asallenshih_flutter_util/open_url.dart' deferred as ou;
 import 'package:asallenshih_flutter_util/webview.dart' deferred as wv;
 import 'package:cross_platform_ui/cross_platform.dart';
 import 'package:flutter/material.dart' hide Route;
@@ -17,6 +18,7 @@ class TdxBusRouteDetail {
   final String? destinationText;
   final String? ticketPriceText;
   final String? viewRouteMapText;
+  final String? openInBrowserText;
   Route? routeDetail;
   TdxBusRouteDetail(
     this.city,
@@ -28,6 +30,7 @@ class TdxBusRouteDetail {
     this.destinationText,
     this.ticketPriceText,
     this.viewRouteMapText,
+    this.openInBrowserText,
   });
   Future<void> popup(BuildContext context) async {
     if (routeDetail == null) {
@@ -80,8 +83,7 @@ class TdxBusRouteDetail {
           ),
           actions: [
             if (routeDetail?.routeMapImageUrl != null &&
-                viewRouteMapText != null &&
-                Device.supportedWebViewOrIframe)
+                viewRouteMapText != null)
               CrossPlatformButtonDialog(
                 child: Text(viewRouteMapText!),
                 onPressed: () {
@@ -106,6 +108,9 @@ class TdxBusRouteDetail {
     final String? mapUrl = routeDetail?.routeMapImageUrl;
     if (mapUrl == null || mapUrl.isEmpty) {
       return;
+    } else if (!Device.supportedWebViewOrIframe) {
+      await openBrowser(mapUrl: mapUrl);
+      return;
     }
     await dialogShow(
       context: context,
@@ -120,6 +125,13 @@ class TdxBusRouteDetail {
             child: _map(mapUrl: _mapUrl(mapUrl)),
           ),
           actions: [
+            if (openInBrowserText != null)
+              CrossPlatformButtonDialog(
+                child: Text(openInBrowserText!),
+                onPressed: () {
+                  openBrowser(mapUrl: mapUrl);
+                },
+              ),
             CrossPlatformButtonDialog(
               child: Text(closeText),
               onPressed: () {
@@ -180,5 +192,10 @@ class TdxBusRouteDetail {
           initialUri: Uri.tryParse(mapUrl),
         ) ??
         Container();
+  }
+
+  static Future<void> openBrowser({required String mapUrl}) async {
+    await ou.loadLibrary();
+    await ou.OpenUrl.openExtApp(_mapUrl(mapUrl));
   }
 }
