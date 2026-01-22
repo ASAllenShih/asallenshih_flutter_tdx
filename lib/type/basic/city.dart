@@ -1,3 +1,6 @@
+import 'package:asallenshih_flutter_util/lang.dart';
+import 'package:asallenshih_flutter_util/langs.dart';
+
 class City {
   City({this.cityID, this.cityName, this.cityCode, this.city});
   final String? cityID;
@@ -6,6 +9,8 @@ class City {
   final String? city;
   String? get cityNameEn =>
       city?.replaceAllMapped(RegExp(r'(?<!^)([A-Z])'), (m) => ' ${m.group(1)}');
+  String get displayName =>
+      Lang.t({Langs.zhHantTW: cityName, Langs.en: cityNameEn});
   static City? fromMap(Map<String, dynamic>? json) {
     return json == null
         ? null
