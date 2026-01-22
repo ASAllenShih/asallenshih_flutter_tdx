@@ -14,11 +14,11 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
     City? city,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onTap,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onLongPress,
-    dynamic Function(tdx_route.Route route, City? city) funcTitle = _funcTitle,
+    dynamic Function(tdx_route.Route route, City? city) funcTitle = dFuncTitle,
     dynamic Function(tdx_route.Route route, City? city) funcSubtitle =
-        _funcSubtitle,
+        dFuncSubtitle,
     dynamic Function(tdx_route.Route route, City? city) funcTrailing =
-        _funcTrailing,
+        dFuncTrailing,
   }) : super(
          title: funcTitle(route, city),
          subtitle: funcSubtitle(route, city),
@@ -70,11 +70,11 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
     TextEditingController? searchController,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onTap,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onLongPress,
-    dynamic Function(tdx_route.Route route, City? city) funcTitle = _funcTitle,
+    dynamic Function(tdx_route.Route route, City? city) funcTitle = dFuncTitle,
     dynamic Function(tdx_route.Route route, City? city) funcSubtitle =
-        _funcSubtitle,
+        dFuncSubtitle,
     dynamic Function(tdx_route.Route route, City? city) funcTrailing =
-        _funcTrailing,
+        dFuncTrailing,
   }) {
     final filteredRoutes = _getRoutes(
       routes,
@@ -100,11 +100,11 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
     TextEditingController? searchController,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onTap,
     FutureOr<void> Function(tdx_route.Route route, City? city)? onLongPress,
-    dynamic Function(tdx_route.Route route, City? city) funcTitle = _funcTitle,
+    dynamic Function(tdx_route.Route route, City? city) funcTitle = dFuncTitle,
     dynamic Function(tdx_route.Route route, City? city) funcSubtitle =
-        _funcSubtitle,
+        dFuncSubtitle,
     dynamic Function(tdx_route.Route route, City? city) funcTrailing =
-        _funcTrailing,
+        dFuncTrailing,
   }) {
     final routes = cityRoutes.entries.expand((entry) {
       final city = entry.key;
@@ -132,7 +132,7 @@ class TdxBusRouteListTile extends CrossPlatformListTile {
   }
 }
 
-Text _funcTitle(tdx_route.Route route, City? city) {
+Text dFuncTitle(tdx_route.Route route, City? city) {
   final routeName = Lang.t({
     Langs.en: route.routeName?.en,
     Langs.zhHantTW: route.routeName?.zhTw,
@@ -140,7 +140,7 @@ Text _funcTitle(tdx_route.Route route, City? city) {
   return Text(routeName);
 }
 
-Text _funcSubtitle(tdx_route.Route route, City? city) {
+Text dFuncSubtitle(tdx_route.Route route, City? city) {
   final departureStopName = Lang.t({
     Langs.en: route.departureStopName?.en,
     Langs.zhHantTW: route.departureStopName?.zhTw,
@@ -155,7 +155,7 @@ Text _funcSubtitle(tdx_route.Route route, City? city) {
   return Text(stop);
 }
 
-Text? _funcTrailing(tdx_route.Route route, City? city) {
+Text? dFuncTrailing(tdx_route.Route route, City? city) {
   if (city == null) {
     return null;
   }

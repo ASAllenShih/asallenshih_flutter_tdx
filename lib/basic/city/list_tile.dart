@@ -9,9 +9,9 @@ class TdxBasicCityListTile extends CrossPlatformListTile {
     City city, {
     FutureOr<void> Function(City city)? onTap,
     FutureOr<void> Function(City city)? onLongPress,
-    dynamic Function(City city) funcTitle = _funcTitle,
-    dynamic Function(City city) funcSubtitle = _funcSubtitle,
-    dynamic Function(City city) funcTrailing = _funcTrailing,
+    dynamic Function(City city) funcTitle = dFuncTitle,
+    dynamic Function(City city) funcSubtitle = dFuncSubtitle,
+    dynamic Function(City city) funcTrailing = dFuncTrailing,
   }) : super(
          title: funcTitle(city),
          subtitle: funcSubtitle(city),
@@ -25,9 +25,9 @@ class TdxBasicCityListTile extends CrossPlatformListTile {
     List<City> cities, {
     FutureOr<void> Function(City city)? onTap,
     FutureOr<void> Function(City city)? onLongPress,
-    dynamic Function(City city) funcTitle = _funcTitle,
-    dynamic Function(City city) funcSubtitle = _funcSubtitle,
-    dynamic Function(City city) funcTrailing = _funcTrailing,
+    dynamic Function(City city) funcTitle = dFuncTitle,
+    dynamic Function(City city) funcSubtitle = dFuncSubtitle,
+    dynamic Function(City city) funcTrailing = dFuncTrailing,
   }) => cities
       .map(
         (city) => TdxBasicCityListTile(
@@ -42,6 +42,6 @@ class TdxBasicCityListTile extends CrossPlatformListTile {
       .toList();
 }
 
-Text _funcTitle(City city) => Text(city.displayName);
-Null _funcSubtitle(City city) => null;
-Null _funcTrailing(City city) => null;
+Text dFuncTitle(City city) => Text(city.displayName);
+Null dFuncSubtitle(City city) => null;
+Null dFuncTrailing(City city) => null;

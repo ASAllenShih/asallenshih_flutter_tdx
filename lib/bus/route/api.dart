@@ -12,16 +12,17 @@ class TdxBusRouteApi {
     final cityData = city.city;
     if (cityData != null) {
       tdx_http.loadLibrary();
-      final json = await tdx_http.TdxHttp.get(
-        'basic/v2/Bus/Route',
-        select: select,
-        query: {
-          'City': cityData,
-          if (routeUID.isNotEmpty) 'RouteUID': routeUID.join(','),
-        },
-        onProgress: onProgress,
+      return Route.fromMaps(
+        await tdx_http.TdxHttp.getIterable(
+          'basic/v2/Bus/Route',
+          select: select,
+          query: {
+            'City': cityData,
+            if (routeUID.isNotEmpty) 'RouteUID': routeUID.join(','),
+          },
+          onProgress: onProgress,
+        ),
       );
-      return Route.fromMaps(await tdx_http.TdxHttp.getIterable(json));
     }
     return null;
   }
