@@ -1,5 +1,6 @@
 import 'package:asallenshih_flutter_tdx/http.dart' deferred as tdx_http;
 import 'package:asallenshih_flutter_tdx/type/basic/city.dart';
+import 'package:collection/collection.dart';
 
 class TdxBasicCityApi {
   static Future<List<City>> get({
@@ -27,8 +28,10 @@ class TdxBasicCityApi {
     void Function(int, int)? onProgress,
     bool bus = false,
   }) async {
-    return (await get(select: select, onProgress: onProgress, bus: bus)
-            as List<City?>)
-        .firstWhere((city) => city?.cityID == cityID, orElse: () => null);
+    return (await get(
+      select: select,
+      onProgress: onProgress,
+      bus: bus,
+    )).firstWhereOrNull((city) => city.cityID == cityID);
   }
 }

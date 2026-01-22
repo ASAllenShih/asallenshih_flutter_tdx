@@ -44,7 +44,7 @@ class TdxBusRouteApi {
   );
 
   static Future<Route?> getPopup(City city, Route route) async {
-    final routes = await get(
+    return (await get(
       city,
       select: [
         'Operators',
@@ -53,10 +53,6 @@ class TdxBusRouteApi {
         'RouteMapImageUrl',
       ],
       routeUID: [if (route.routeUID != null) route.routeUID!],
-    );
-    if (routes != null && routes.isNotEmpty) {
-      return routes.first;
-    }
-    return null;
+    ))?.firstOrNull;
   }
 }

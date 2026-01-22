@@ -15,6 +15,7 @@ dependencies:
   cross_platform_ui:
     git: https://github.com/ASAllenShih/cross_platform_ui
   retry: ^3.1.2
+  collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:
