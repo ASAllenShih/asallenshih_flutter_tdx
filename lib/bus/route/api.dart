@@ -47,6 +47,7 @@ class TdxBusRouteApi {
     return (await get(
       city,
       select: [
+        'RouteUID',
         'Operators',
         'TicketPriceDescriptionZh',
         'TicketPriceDescriptionEn',
