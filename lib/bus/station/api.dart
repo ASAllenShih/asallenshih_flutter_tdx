@@ -46,6 +46,7 @@ class TdxBusStationApi {
     void Function(int, int)? onProgress,
   }) => get(
     city,
+    station: station,
     select: ['StationUID', 'StationName', 'StationAddress', 'Bearing'],
     onProgress: onProgress,
   );
