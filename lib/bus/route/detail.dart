@@ -47,6 +47,7 @@ class TdxBusRouteDetail {
             ),
           ).widget;
         },
+        barrierDismissible: false,
       );
       routeDetail = await TdxBusRouteApi.getPopup(city, route);
       if (!context.mounted) {
