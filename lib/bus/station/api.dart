@@ -47,10 +47,21 @@ class TdxBusStationApi {
   }) => get(
     city,
     station: station,
-    select: ['StationUID', 'StationName', 'StationAddress', 'Bearing'],
+    select: [
+      'StationUID',
+      'StationName',
+      'StationPosition/PositionLon',
+      'StationPosition/PositionLat',
+      'StationAddress',
+      'Bearing',
+    ],
     onProgress: onProgress,
   );
 
   static Future<Station?> getPopup(City city, Station station) async =>
-      (await getList(city, station: station))?.firstOrNull;
+      (await get(
+        city,
+        station: station,
+        select: ['StationUID', 'StationName', 'StationAddress', 'Bearing'],
+      ))?.firstOrNull;
 }
