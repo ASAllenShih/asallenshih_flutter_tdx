@@ -30,8 +30,8 @@ class TdxBusStationApi {
     city,
     select: [
       'StationUID',
-      'StationPosition.PositionLon',
-      'StationPosition.PositionLat',
+      'StationPosition/PositionLon',
+      'StationPosition/PositionLat',
     ],
     onProgress: onProgress,
   );
