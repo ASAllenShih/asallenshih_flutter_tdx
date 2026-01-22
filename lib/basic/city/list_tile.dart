@@ -21,6 +21,25 @@ class TdxBasicCityListTile extends CrossPlatformListTile {
          onTap: onTap == null ? null : () => onTap(city),
          onLongPress: onLongPress == null ? null : () => onLongPress(city),
        );
+  static List<TdxBasicCityListTile> fromCities(
+    List<City> cities, {
+    FutureOr<void> Function(City city)? onTap,
+    FutureOr<void> Function(City city)? onLongPress,
+    dynamic Function(City city) funcTitle = _funcTitle,
+    dynamic Function(City city) funcSubtitle = _funcSubtitle,
+    dynamic Function(City city) funcTrailing = _funcTrailing,
+  }) => cities
+      .map(
+        (city) => TdxBasicCityListTile(
+          city,
+          onTap: onTap,
+          onLongPress: onLongPress,
+          funcTitle: funcTitle,
+          funcSubtitle: funcSubtitle,
+          funcTrailing: funcTrailing,
+        ),
+      )
+      .toList();
 }
 
 Text _funcTitle(City city) => Text(city.displayName);
