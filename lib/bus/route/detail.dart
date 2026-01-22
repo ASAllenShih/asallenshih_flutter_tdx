@@ -40,7 +40,7 @@ class TdxBusRouteDetail {
           ).widget;
         },
       );
-      await TdxBusRouteApi.getPopup(city, route);
+      routeDetail = await TdxBusRouteApi.getPopup(city, route);
       if (!context.mounted) {
         return;
       }
