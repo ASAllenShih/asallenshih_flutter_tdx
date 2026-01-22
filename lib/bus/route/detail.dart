@@ -79,7 +79,9 @@ class TdxBusRouteDetail {
                 Device.supportedWebViewOrIframe)
               CrossPlatformButtonDialog(
                 child: Text(viewRouteMapText!),
-                onPressed: () {},
+                onPressed: () {
+                  map(context);
+                },
               ),
             CrossPlatformButtonDialog(
               child: Text(closeText),
