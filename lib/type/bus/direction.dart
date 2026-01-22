@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 enum Direction {
   outbound(0),
   inbound(1),
@@ -7,12 +9,7 @@ enum Direction {
 
   const Direction(this.value);
   final int value;
-  static Direction? fromValue(int? value) {
-    return value == null
-        ? null
-        : (Direction.values as List<Direction?>).firstWhere(
-            (e) => e?.value == value,
-            orElse: () => null,
-          );
-  }
+  static Direction? fromValue(int? value) => value == null
+      ? null
+      : Direction.values.firstWhereOrNull((e) => e.value == value);
 }

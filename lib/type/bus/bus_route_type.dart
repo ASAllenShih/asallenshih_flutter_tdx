@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 enum BusRouteType {
   cityBus(11),
   interCityBus(12),
@@ -6,12 +8,7 @@ enum BusRouteType {
 
   final int code;
   const BusRouteType(this.code);
-  static BusRouteType? fromValue(int? code) {
-    return code == null
-        ? null
-        : (BusRouteType.values as List<BusRouteType?>).firstWhere(
-            (e) => e?.code == code,
-            orElse: () => null,
-          );
-  }
+  static BusRouteType? fromValue(int? code) => code == null
+      ? null
+      : BusRouteType.values.firstWhereOrNull((e) => e.code == code);
 }

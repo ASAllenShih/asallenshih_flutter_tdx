@@ -5,6 +5,7 @@ import 'package:asallenshih_flutter_tdx/type/bus/station.dart';
 class TdxBusStationApi {
   static Future<List<Station>?> get(
     City city, {
+    Station? station,
     List<String> select = const [],
     void Function(int, int)? onProgress,
   }) async {
@@ -15,7 +16,10 @@ class TdxBusStationApi {
         await tdx_http.TdxHttp.getIterable(
           'basic/v2/Bus/Station',
           select: select,
-          query: {'City': cityData},
+          query: {
+            'City': cityData,
+            if (station?.stationUID != null) 'StationUID': station!.stationUID!,
+          },
           onProgress: onProgress,
         ),
       );
@@ -35,4 +39,17 @@ class TdxBusStationApi {
     ],
     onProgress: onProgress,
   );
+
+  static Future<List<Station>?> getList(
+    City city, {
+    Station? station,
+    void Function(int, int)? onProgress,
+  }) => get(
+    city,
+    select: ['StationUID', 'StationName', 'StationAddress', 'Bearing'],
+    onProgress: onProgress,
+  );
+
+  static Future<Station?> getPopup(City city, Station station) async =>
+      (await getList(city, station: station))?.firstOrNull;
 }

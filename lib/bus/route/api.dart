@@ -43,17 +43,15 @@ class TdxBusRouteApi {
     onProgress: onProgress,
   );
 
-  static Future<Route?> getPopup(City city, Route route) async {
-    return (await get(
-      city,
-      select: [
-        'RouteUID',
-        'Operators',
-        'TicketPriceDescriptionZh',
-        'TicketPriceDescriptionEn',
-        'RouteMapImageUrl',
-      ],
-      routeUID: [if (route.routeUID != null) route.routeUID!],
-    ))?.firstOrNull;
-  }
+  static Future<Route?> getPopup(City city, Route route) async => (await get(
+    city,
+    select: [
+      'RouteUID',
+      'Operators',
+      'TicketPriceDescriptionZh',
+      'TicketPriceDescriptionEn',
+      'RouteMapImageUrl',
+    ],
+    routeUID: [if (route.routeUID != null) route.routeUID!],
+  ))?.firstOrNull;
 }
