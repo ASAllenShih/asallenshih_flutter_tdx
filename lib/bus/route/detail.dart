@@ -36,7 +36,12 @@ class TdxBusRouteDetail {
         builder: (context) {
           return CrossPlatformDialogAlert(
             title: Text(loadingText ?? ''),
-            content: CrossPlatformProgressIndicator(),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [CrossPlatformProgressIndicator().widget],
+            ),
           ).widget;
         },
       );
