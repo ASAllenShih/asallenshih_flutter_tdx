@@ -17,7 +17,7 @@ class TdxBasicCityApi {
       ),
     );
     if (bus) {
-      cities.add(City.busInter);
+      cities.insert(0, City.busInter);
     }
     return cities;
   }
