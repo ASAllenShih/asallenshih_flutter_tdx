@@ -23,7 +23,7 @@ class TdxBasicCityApi {
     return cities;
   }
 
-  static Future<City?> getByCityID(
+  static Future<City?> getByID(
     String cityID, {
     List<String> select = const [],
     void Function(int, int)? onProgress,

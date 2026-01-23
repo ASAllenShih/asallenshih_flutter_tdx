@@ -30,6 +30,7 @@ class TdxBusRouteApi {
 
   static Future<List<Route>?> getList(
     City city, {
+    List<String> routeUID = const [],
     void Function(int, int)? onProgress,
   }) => get(
     city,
@@ -41,11 +42,13 @@ class TdxBusRouteApi {
       'DestinationStopNameZh',
       'DestinationStopNameEn',
     ],
+    routeUID: routeUID,
     onProgress: onProgress,
   );
 
   static Future<Route?> getPopup(City city, Route route) async => (await get(
     city,
+    routeUID: [route.routeUID!],
     select: [
       'RouteUID',
       'Operators',
@@ -53,6 +56,15 @@ class TdxBusRouteApi {
       'TicketPriceDescriptionEn',
       'RouteMapImageUrl',
     ],
-    routeUID: [if (route.routeUID != null) route.routeUID!],
+  ))?.firstOrNull;
+
+  static Future<Route?> getListDataByID(
+    City city,
+    String routeUID, {
+    void Function(int, int)? onProgress,
+  }) async => (await getList(
+    city,
+    routeUID: [routeUID],
+    onProgress: onProgress,
   ))?.firstOrNull;
 }
