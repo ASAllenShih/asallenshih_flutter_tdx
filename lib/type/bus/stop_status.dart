@@ -3,10 +3,10 @@ import 'package:collection/collection.dart';
 
 enum StopStatus {
   normal(0),
-  notYetDeparted(1),
-  noStopDueToTrafficControl(2),
-  lastBusPassed(3),
-  noServiceToday(4);
+  noDeparture(1),
+  trafficControl(2),
+  serviceOver(3),
+  noService(4);
 
   final int value;
   const StopStatus(this.value);
