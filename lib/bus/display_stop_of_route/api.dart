@@ -17,7 +17,7 @@ class TdxBusDisplayStopOfRouteApi {
         await tdx_http.TdxHttp.getIterable(
           'basic/v2/Bus/DisplayStopOfRoute',
           select: select,
-          query: {'City': cityData},
+          query: {'City': cityData, 'RouteUID': route.routeUID!},
           onProgress: onProgress,
           duration: const Duration(days: 30),
         ),
