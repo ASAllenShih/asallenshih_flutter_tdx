@@ -65,4 +65,32 @@ class TdxBusStationApi {
         station: station,
         select: ['StationUID', 'StationName', 'StationAddress', 'Bearing'],
       ))?.firstOrNull;
+
+  static Future<Station?> getByUID(
+    City city,
+    String stationUID, {
+    List<String> select = const [],
+    void Function(int, int)? onProgress,
+  }) async => (await get(
+    city,
+    station: Station(stationUID: stationUID),
+    select: select,
+    onProgress: onProgress,
+  ))?.firstOrNull;
+
+  static Future<Station?> getEta(City city, String stationUID) => getByUID(
+    city,
+    stationUID,
+    select: [
+      'StationUID',
+      'StationName',
+      'StationPosition/PositionLon',
+      'StationPosition/PositionLat',
+      'StationAddress',
+      'Bearing',
+      'Stops/StopUID',
+      'Stops/RouteUID',
+      'Stops/RouteName',
+    ],
+  );
 }
