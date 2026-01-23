@@ -46,7 +46,7 @@ class EstimatedTimeOfArrivalListTile extends CrossPlatformListTile {
              : () => onLongPress(estimatedTime, stop, route),
        );
   static List<EstimatedTimeOfArrivalListTile> fromStops(
-    List<EstimatedTime> estimatedTimes,
+    List<EstimatedTime>? estimatedTimes,
     List<Stop> stops, {
     dynamic Function(EstimatedTime? estimatedTime, Stop? stop, Route? route)
         funcLeading =
@@ -82,7 +82,7 @@ class EstimatedTimeOfArrivalListTile extends CrossPlatformListTile {
     return stops
         .map(
           (Stop stop) => EstimatedTimeOfArrivalListTile(
-            estimatedTimes.firstWhereOrNull(
+            estimatedTimes?.firstWhereOrNull(
               (EstimatedTime e) => e.stopUID == stop.stopUID,
             ),
             stop: stop,
@@ -97,7 +97,7 @@ class EstimatedTimeOfArrivalListTile extends CrossPlatformListTile {
   }
 
   static List<EstimatedTimeOfArrivalListTile> fromRoutes(
-    List<EstimatedTime> estimatedTimes,
+    List<EstimatedTime>? estimatedTimes,
     List<Route> routes, {
     dynamic Function(EstimatedTime? estimatedTime, Stop? stop, Route? route)
         funcLeading =
@@ -125,7 +125,7 @@ class EstimatedTimeOfArrivalListTile extends CrossPlatformListTile {
     return routes
         .map(
           (Route route) => EstimatedTimeOfArrivalListTile(
-            estimatedTimes.firstWhereOrNull(
+            estimatedTimes?.firstWhereOrNull(
               (EstimatedTime e) => e.routeUID == route.routeUID,
             ),
             route: route,
