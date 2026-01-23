@@ -1,7 +1,7 @@
 import 'package:asallenshih_flutter_tdx/http.dart' deferred as tdx_http;
 import 'package:asallenshih_flutter_tdx/type/basic/city.dart';
 import 'package:asallenshih_flutter_tdx/type/bus/display_stop_of_route.dart';
-import 'package:flutter/widgets.dart';
+import 'package:asallenshih_flutter_tdx/type/bus/route.dart';
 
 class TdxBusDisplayStopOfRouteApi {
   static Future<List<DisplayStopOfRoute>?> get(
