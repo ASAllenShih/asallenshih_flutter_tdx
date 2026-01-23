@@ -10,7 +10,8 @@ import 'package:flutter/material.dart' hide Route;
 
 class TdxBusRouteDetail {
   final City city;
-  final Route route;
+  final Route routeBase;
+  final Route routeList;
   final String closeText;
   final String? loadingText;
   final String? operatorText;
@@ -22,7 +23,8 @@ class TdxBusRouteDetail {
   Route? routeDetail;
   TdxBusRouteDetail(
     this.city,
-    this.route, {
+    this.routeBase,
+    this.routeList, {
     required this.closeText,
     this.loadingText,
     this.operatorText,
@@ -49,18 +51,18 @@ class TdxBusRouteDetail {
         },
         barrierDismissible: false,
       );
-      routeDetail = await TdxBusRouteApi.getPopup(city, route);
+      routeDetail = await TdxBusRouteApi.getPopup(city, routeBase);
       if (!context.mounted) {
         return;
       }
       Navigator.of(context).pop();
     }
-    final String routeName = route.routeName?.text ?? '';
+    final String routeName = routeBase.routeName?.text ?? '';
     final String? operator = routeDetail?.operators
         ?.map((o) => o.operatorName?.text ?? '')
         .join(', ');
-    final String? departureStop = route.departureStopName?.text;
-    final String? destinationStop = route.destinationStopName?.text;
+    final String? departureStop = routeBase.departureStopName?.text;
+    final String? destinationStop = routeBase.destinationStopName?.text;
     final String? ticketPrice = routeDetail?.ticketPriceDescription?.text;
     await dialogShow(
       context: context,
@@ -105,12 +107,12 @@ class TdxBusRouteDetail {
   }
 
   Future<void> map(BuildContext context) async {
-    final String routeName = route.routeName?.text ?? '';
+    final String routeName = routeBase.routeName?.text ?? '';
     final String? mapUrl = routeDetail?.routeMapImageUrl;
     if (mapUrl == null || mapUrl.isEmpty) {
       return;
     } else if (!Device.supportedWebViewOrIframe) {
-      await openBrowser(mapUrl: mapUrl);
+      await _openBrowser(mapUrl: mapUrl);
       return;
     }
     await dialogShow(
@@ -130,7 +132,7 @@ class TdxBusRouteDetail {
               CrossPlatformButtonDialog(
                 child: Text(openInBrowserText!),
                 onPressed: () {
-                  openBrowser(mapUrl: mapUrl);
+                  _openBrowser(mapUrl: mapUrl);
                 },
               ),
             CrossPlatformButtonDialog(
@@ -195,7 +197,7 @@ class TdxBusRouteDetail {
         Container();
   }
 
-  static Future<void> openBrowser({required String mapUrl}) async {
+  static Future<void> _openBrowser({required String mapUrl}) async {
     await ou.loadLibrary();
     await ou.OpenUrl.openExtApp(_mapUrl(mapUrl));
   }

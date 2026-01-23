@@ -24,10 +24,9 @@ class Operator {
           );
   }
 
-  static List<Operator> fromMaps(Iterable<dynamic>? jsons) {
-    return (jsons ?? <dynamic>[])
-        .map((e) => fromMap(e as Map<String, dynamic>?))
-        .whereType<Operator>()
-        .toList();
-  }
+  static List<Operator> fromMaps(Iterable<dynamic>? jsons) =>
+      (jsons ?? <dynamic>[])
+          .map((e) => fromMap(e as Map<String, dynamic>?))
+          .whereType<Operator>()
+          .toList();
 }

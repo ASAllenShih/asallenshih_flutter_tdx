@@ -56,10 +56,8 @@ class Route {
           );
   }
 
-  static List<Route> fromMaps(Iterable<dynamic>? maps) {
-    return (maps ?? <dynamic>[])
-        .map((e) => fromMap(e as Map<String, dynamic>?))
-        .whereType<Route>()
-        .toList();
-  }
+  static List<Route> fromMaps(Iterable<dynamic>? maps) => (maps ?? <dynamic>[])
+      .map((e) => fromMap(e as Map<String, dynamic>?))
+      .whereType<Route>()
+      .toList();
 }

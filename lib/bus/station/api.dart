@@ -21,6 +21,7 @@ class TdxBusStationApi {
             if (station?.stationUID != null) 'StationUID': station!.stationUID!,
           },
           onProgress: onProgress,
+          duration: const Duration(days: 30),
         ),
       );
     }

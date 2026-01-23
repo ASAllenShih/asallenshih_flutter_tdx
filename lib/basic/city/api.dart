@@ -14,6 +14,7 @@ class TdxBasicCityApi {
         'basic/v2/Basic/City',
         select: select,
         onProgress: onProgress,
+        duration: const Duration(days: 365),
       ),
     );
     if (bus) {

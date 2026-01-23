@@ -21,6 +21,7 @@ class TdxBusRouteApi {
             if (routeUID.isNotEmpty) 'RouteUID': routeUID.join(','),
           },
           onProgress: onProgress,
+          duration: const Duration(days: 30),
         ),
       );
     }

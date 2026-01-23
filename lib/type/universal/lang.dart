@@ -6,9 +6,7 @@ class Lang {
   final String? zhTw;
   final String? en;
   String get text => util_lang.Lang.t({Langs.zhHantTW: zhTw, Langs.en: en});
-  static Lang? fromMap(Map<String, dynamic>? json) {
-    return json == null
-        ? null
-        : Lang(zhTw: json['Zh_tw'] as String?, en: json['En'] as String?);
-  }
+  static Lang? fromMap(Map<String, dynamic>? json) => json == null
+      ? null
+      : Lang(zhTw: json['Zh_tw'] as String?, en: json['En'] as String?);
 }
