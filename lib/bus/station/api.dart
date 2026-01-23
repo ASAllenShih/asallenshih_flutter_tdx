@@ -78,7 +78,11 @@ class TdxBusStationApi {
     onProgress: onProgress,
   ))?.firstOrNull;
 
-  static Future<Station?> getEta(City city, String stationUID) => getByUID(
+  static Future<Station?> getEta(
+    City city,
+    String stationUID, {
+    void Function(int, int)? onProgress,
+  }) => getByUID(
     city,
     stationUID,
     select: [
@@ -92,5 +96,6 @@ class TdxBusStationApi {
       'Stops/RouteUID',
       'Stops/RouteName',
     ],
+    onProgress: onProgress,
   );
 }
