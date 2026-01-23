@@ -10,8 +10,7 @@ import 'package:flutter/material.dart' hide Route;
 
 class TdxBusRouteDetail {
   final City city;
-  final Route routeBase;
-  final Route routeList;
+  final Route route;
   final String closeText;
   final String? loadingText;
   final String? operatorText;
@@ -23,8 +22,7 @@ class TdxBusRouteDetail {
   Route? routeDetail;
   TdxBusRouteDetail(
     this.city,
-    this.routeBase,
-    this.routeList, {
+    this.route, {
     required this.closeText,
     this.loadingText,
     this.operatorText,
@@ -51,18 +49,18 @@ class TdxBusRouteDetail {
         },
         barrierDismissible: false,
       );
-      routeDetail = await TdxBusRouteApi.getPopup(city, routeBase);
+      routeDetail = await TdxBusRouteApi.getPopup(city, route);
       if (!context.mounted) {
         return;
       }
       Navigator.of(context).pop();
     }
-    final String routeName = routeBase.routeName?.text ?? '';
+    final String routeName = route.routeName?.text ?? '';
     final String? operator = routeDetail?.operators
         ?.map((o) => o.operatorName?.text ?? '')
         .join(', ');
-    final String? departureStop = routeBase.departureStopName?.text;
-    final String? destinationStop = routeBase.destinationStopName?.text;
+    final String? departureStop = route.departureStopName?.text;
+    final String? destinationStop = route.destinationStopName?.text;
     final String? ticketPrice = routeDetail?.ticketPriceDescription?.text;
     await dialogShow(
       context: context,
@@ -107,7 +105,7 @@ class TdxBusRouteDetail {
   }
 
   Future<void> map(BuildContext context) async {
-    final String routeName = routeBase.routeName?.text ?? '';
+    final String routeName = route.routeName?.text ?? '';
     final String? mapUrl = routeDetail?.routeMapImageUrl;
     if (mapUrl == null || mapUrl.isEmpty) {
       return;
