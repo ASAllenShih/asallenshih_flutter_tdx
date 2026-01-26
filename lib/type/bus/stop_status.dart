@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 enum StopStatus {
   normal(0),
   noDeparture(1),
-  trafficControl(2),
+  reRouted(2),
   serviceOver(3),
   noService(4);
 
