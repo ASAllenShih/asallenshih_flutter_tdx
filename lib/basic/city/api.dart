@@ -8,7 +8,7 @@ class TdxBasicCityApi {
     void Function(int, int)? onProgress,
     bool bus = false,
   }) async {
-    tdx_http.loadLibrary();
+    await tdx_http.loadLibrary();
     final cities = City.fromMaps(
       await tdx_http.TdxHttp.getIterable(
         'basic/v2/Basic/City',

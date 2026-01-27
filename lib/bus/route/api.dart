@@ -11,7 +11,7 @@ class TdxBusRouteApi {
   }) async {
     final cityData = city.city;
     if (cityData != null) {
-      tdx_http.loadLibrary();
+      await tdx_http.loadLibrary();
       return Route.fromMaps(
         await tdx_http.TdxHttp.getIterable(
           'basic/v2/Bus/Route',
