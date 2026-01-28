@@ -48,6 +48,7 @@ class EstimatedTimeOfArrivalListTile extends CrossPlatformListTile {
   static List<EstimatedTimeOfArrivalListTile> fromStops(
     List<EstimatedTime>? estimatedTimes,
     List<Stop> stops, {
+    String? subRouteUID,
     dynamic Function(EstimatedTime? estimatedTime, Stop? stop, Route? route)
         funcLeading =
         dFuncBusIcon,
@@ -83,7 +84,9 @@ class EstimatedTimeOfArrivalListTile extends CrossPlatformListTile {
         .map(
           (Stop stop) => EstimatedTimeOfArrivalListTile(
             estimatedTimes?.firstWhereOrNull(
-              (EstimatedTime e) => e.stopUID == stop.stopUID,
+              (EstimatedTime e) =>
+                  e.stopUID == stop.stopUID &&
+                  (subRouteUID == null || e.subRouteUID == subRouteUID),
             ),
             stop: stop,
             funcLeading: funcLeading,
