@@ -5,6 +5,7 @@ class EstimatedTime {
   final String? plateNumb;
   final String? stopUID;
   final String? routeUID;
+  final String? subRouteUID;
   final Direction? direction;
   final int? estimateTime;
   final String? scheduledTime;
@@ -16,6 +17,7 @@ class EstimatedTime {
     this.plateNumb,
     this.stopUID,
     this.routeUID,
+    this.subRouteUID,
     this.direction,
     this.estimateTime,
     this.scheduledTime,
@@ -30,6 +32,7 @@ class EstimatedTime {
           plateNumb: map['PlateNumb'],
           stopUID: map['StopUID'],
           routeUID: map['RouteUID'],
+          subRouteUID: map['SubRouteUID'],
           direction: Direction.fromValue(map['Direction']),
           estimateTime: map['EstimateTime'],
           scheduledTime: map['ScheduledTime'],
